@@ -1,0 +1,390 @@
+#EXERCISE_1:
+#BUSINESS_INTELLIGENCE
+
+def minimum_profitable_volume(sell_price, fixed_cost, cost_per_unit):
+    """
+    For this exercise, you will need to implement a function that
+    computes the minimum number of units that need to be manufactured by a factory
+    for their process to be profitable.
+
+    We assume that every unit manufactured is sold at the sell_price.
+    You will need to take into account the fixed_cost, which is a constant cost
+    associated with manufactoring as well as the cost_per_unit that we have to pay for
+    each unit manufactured.
+
+    Your goal is to find how many units need to be built and sold
+    in order for the total cost to be entirely covered by sales.
+
+    E.g., minimum_profitable_volume(1020, 1000, 20) is 1
+    E.g., minimum_profitable_volume(1019, 1000, 20) is 2
+    E.g., minimum_profitable_volume(600, 1000, 20) is 2
+    E.g., minimum_profitable_volume(30, 1000, 20) is 100
+    E.g., minimum_profitable_volume(21, 1000, 20) is 1000
+
+    Note: It isn't sustainable for the factory to sell a unit in a lower price than
+    its manufacturing cost as it wouldn't make any profit. If that is the case and
+    you cannot be profitable, return None.
+
+    :param sell_price: price each unit is sold at
+    :return: number of units that need to be made and sold
+    :rtype: float | int
+    """
+    raise NotImplementedError
+
+
+#EXERCISE_2:
+#CUSTOMERS
+
+CLIENTS_EXAMPLE = [
+    {
+        "first-name": "Elsa",
+        "last-name": "Frost",
+        "title": "Princess",
+        "address": "33 Castle Street, London",
+        "loyalty-program": "Gold",
+    },
+    {
+        "first-name": "Anna",
+        "last-name": "Frost",
+        "title": "Princess",
+        "address": "34 Castle Street, London",
+        "loyalty-program": "Platinum",
+    },
+    {
+        "first-name": "Harry",
+        "middle-name": "Harold",
+        "last-name": "Hare",
+        "title": "Mr",
+        "email-address": "harry.harold@hare.name",
+        "loyalty-program": "Silver",
+    },
+    {
+        "first-name": "Leonnie",
+        "last-name": "Lion",
+        "title": "Mrs",
+        "loyalty-program": "Silver",
+    },
+]
+
+
+def process_clients(segment):
+    """
+    This function processes a list of data about clients to prepare for a marketing
+    campaign.
+
+    Each client is represented by a dictionary with various fields (see CLIENTS_EXAMPLE
+    above). Note that sometimes, some of the fields can be missing, you will need to
+    take extra care to handle them.
+
+    This function should return a new list of clients with the following format:
+
+    For each client that have a registered address, we need a tuple that contains
+    the following details:
+        - full name with title (e.g., "Mr John Smith") omitting any parts that
+          are not provided,
+        - full name includes title, first name, middle name and last name in
+          that order if defined,
+        - the mailing address (not the email-address).
+    If a client has no registered addresses, they should not be included in the
+    returned list.
+
+    E.g., preprocess_client_segment(CLIENTS_EXAMPLE) includes 'Princess Elsa Frost'
+    but it should not include 'Mrs Leonnie Lion' because there are no associated addresses in the data.
+
+    So, for preprocess_client_segment(CLIENTS_EXAMPLE) one of the tuples included in the list
+    is ('Princess Elsa Frost', '33 Castle Street, London')
+
+    :param segment: list of client records. See sample above.
+    :return: preprocessed list of tuples consisting of full name and mailing address.
+    :rtype: list of tuples
+    """
+    raise NotImplementedError
+
+#EXERCISE_3:
+#DATA_PROCESSING
+#2 PARTS (A, B)
+
+"""
+DATA PROCESSING
+
+DO NOT MODIFY CONSTANTS
+"""
+
+
+PRICES_PER_HOUR_PER_DAY_SAMPLE = [
+    [
+        11300,
+        12000,
+        12100,
+        12100,
+        11800,
+        11100,
+        10300,
+        9400,
+    ],  # Prices for business hours on Monday
+    [
+        10100,
+        10300,
+        10200,
+        10300,
+        10200,
+        10100,
+        10200,
+        10200,
+    ],  # Prices for business hours on Tuesday
+    [
+        10600,
+        10700,
+        10100,
+        10000,
+        9800,
+        8400,
+        7500,
+        9000,
+    ],  # Prices for business hours on Wednesday
+    [
+        9100,
+        9600,
+        10200,
+        10200,
+        10200,
+        10300,
+        10100,
+        10400,
+    ],  # Prices for business hours on Thursday
+    [
+        10500,
+        10600,
+        13200,
+        10800,
+        10500,
+        10200,
+        9900,
+        9800,
+    ],  # Prices for business hours on Friday
+]
+
+
+def normalize_prices(prices):
+    """
+    This function takes a list of prices for a given commodity.
+
+    The prices are given as a list of list of numbers. Each inner list corresponds
+    to a day of the week, and each number corresponds to the price at a given
+    hour of the day (limited to business hours only).
+
+    See the example of PRICES_PER_HOUR_PER_DAY_SAMPLE above. Here we have a list
+    containing five lists (so the data is for one week only), each inner list
+    contains 8 numbers, for 8 hours in the day.
+
+    This function should normalise all the prices such that the first value is
+    worth 100 and the other are adjusted accordingly.
+
+    E.g., normalize_prices([[1, 2], [3, 4]]) is [[100, 200], [300, 400]]
+    E.g., normalize_prices([[200, 20], [30, 400]]) is [[100, 10], [15, 200]]
+
+    NOTE: prices need to consist of lists of the same length meaning that no prices
+    for given hours are missing and if they are, you must raise a ValueError.
+
+    :param prices: list of list of prices
+    :return: normalised list of list of prices where the first price is 100
+    and the other prices are scaled accordingly
+    :rtype: list
+    """
+    raise NotImplementedError
+
+
+def flip_prices(prices):
+    """
+    This function returns a list of daily prices for each observed hour given
+    a list of hourly prices for each observed day.
+
+    E.g., flip_prices([[1, 2, 3], [4, 5, 6]]) is [[1, 4], [2, 5], [3, 6]]
+
+    NOTE: prices need to consist of lists of the same length meaning that no prices
+    for given hours are missing and if they are, you must raise a ValueError.
+
+    :param prices: list (for days) of list (for hours) of prices
+    :return: list (for hours) of list (for days) of prices
+    :rtype: list
+    """
+    raise NotImplementedError
+
+#EXERCISE_4:
+#ORDERS_MANAGEMENT
+#3 PARTS (A, B, C)
+
+"""
+ORDER AND CART MANAGEMENT
+
+Orders are sets of items ordered by a customer
+An ordered item has four components:
+ - a name
+ - a quantity (the number of such items bought)
+ - a unit price (in pence)
+ - a unit weight (in pounds)
+Those are represented by a tuple.
+
+NOTE: You can safely assume that all orders have all the required fields
+(name, quantity, unit-price and unit-weight) so no validation needs to be made.
+
+DO NOT MODIFY CONSTANTS
+"""
+
+ORDER_SAMPLE_1 = {("lamp", 2, 2399, 2), ("chair", 4, 3199, 10), ("table", 1, 5599, 85)}
+ORDER_SAMPLE_2 = {("sofa", 1, 18399, 140), ("bookshelf", 2, 4799, 40)}
+
+CATALOGUE = {("table", 9999, 20), ("chair", 2999, 5), ("lamp", 1999, 10)}
+
+
+def delivery_charges(order):
+    """
+    Compute the delivery charges for an order. The company charges a flat £50
+    fee plus £20 for each 100lbs (additional weight under 100lbs is ignored).
+
+    E.g., delivery_charges({("desk", 1, 11999, 160)}) is 7000 (pence)
+    E.g., delivery_charges({("desk", 2, 11999, 160)}) is 11000 (pence)
+    E.g., delivery_charges({("lamp", 1, 2399, 2)}) is 5000 (pence)
+    E.g., delivery_charges({("lamp", 50, 2399, 2)}) is 7000 (pence)
+
+    :param order: order to process. See samples for examples.
+    :return: delivery fee in pence
+    :rtype: float | int
+    """
+    raise NotImplementedError
+
+
+def total_charge(order):
+    """
+    Compute the total charge for an order. It includes:
+        - total price of items,
+        - VAT (20% of the price of items),
+        - delivery fee
+
+    NOTE: in this computation, VAT is not applied to the delivery
+
+    E.g., total_charge({("desk", 2, 11999, 160)}) is 39797 (pence)
+    E.g., total_charge({("lamp", 50, 2399, 2)}) is 150940 (pence)
+
+    Hint: Look up the built-in Python function round().
+
+    :param order: order to process. See samples.
+    :return: total price, in pence, rounded to the nearest penny.
+    :rtype: float | int
+    """
+    raise NotImplementedError
+
+
+def add_item_to_order(name, quantity, order):
+    """
+    When a customer adds items to their basket, you need to update their order.
+
+    The customer provides some of the details (the name of the item and
+    the quantity they want). The rest (price and weight) needs to be looked up in
+    the CATALOGUE provided above.
+
+    NOTE: you must return a new order as a set and leave the argument unmodified.
+
+    NOTE: if the order already contains some of the items, you must update the
+    quantity field for that item; otherwise, you must add a new entry in the
+    order
+
+    NOTE: if the item cannot be found in the catalogue, the function should raise
+    a KeyError.
+
+    E.g., add_item_to_order("table", 1, {("table", 1, 9999, 20)}) is
+        {("table", 2, 9999, 20)}
+    E.g., add_item_to_order("chair", 1, {("table", 1, 9999, 20)}) is
+        {("table", 1, 9999, 20), ("chair", 1, 2999, 5)}
+
+    :param name: name of the item to add
+    :param quantity: number of items to add
+    :param order: previous order
+    :return: a new order with the added items. If the item is unknown, raise a KeyError
+    :rtype: set
+    """
+    raise NotImplementedError
+
+#EXERCISE_5:
+#TEXT_ANALYSIS
+#2 PARTS (A, B)
+
+"""
+ANALYSE TEXT
+
+DO NOT MODIFY CONSTANTS
+"""
+
+import re
+
+
+# Sample from 20,000 leagues under the sea by Jules Verne
+
+TEXT_SAMPLE = """
+Striking an average of observations taken at different times-- rejecting those
+timid estimates that gave the object a length of 200 feet, and ignoring those
+exaggerated views that saw it as a mile wide and three long--you could still
+assert that this phenomenal creature greatly exceeded the dimensions of
+anything then known to ichthyologists, if it existed at all.
+Now then, it did exist, this was an undeniable fact; and since the human mind
+dotes on objects of wonder, you can understand the worldwide excitement caused
+by this unearthly apparition. As for relegating it to the realm of fiction,
+that charge had to be dropped.
+In essence, on July 20, 1866, the steamer Governor Higginson, from the
+Calcutta & Burnach Steam Navigation Co., encountered this moving mass five
+miles off the eastern shores of Australia.
+"""
+
+
+def extract_numbers(text):
+    """
+    This function finds all the numbers in the text and returns them in a list
+    of floats.
+
+    NOTE: commas are used to separate thousands
+    NOTE: several consecutive numbers are separated by a comma and a space
+
+    E.g., extract_numbers("this is 1 awesome string") is [1.0]
+    E.g., extract_numbers("12 days of XMas") is [12.0]
+    E.g., extract_numbers("1, 2, 3, un pasito pa'lante Maria")
+    is [1.0, 2.0, 3.0]
+
+    :param text: string that forms English text
+    :return: list of numbers (as floats) that are present in the text
+    :rtype: list
+    """
+    raise NotImplementedError
+
+
+def latin_ish_words(text):
+    """
+    English has words from Latin (or Spanish, Italian, French, etc.) and from
+    German (or Dutch, etc.). They are often easy to tell apart. This function
+    picks up some of the Latin sounding words based on some of their features.
+
+    Latin features:
+        - tion (as in navigation, isolation, or mitigation)
+        - ex (as in explanation, exfiltrate, or expert)
+        - ph (as in philosophy, philanthropy, or ephemera)
+        - ost, ist, ast (as in hostel, distribute, past)
+
+    NOTE: this matching method is not exact, many Germanic words include those
+    features, and many Latin words lack them.
+    NOTE: matching this way should ignore case. For the purpose of this exercise,
+    we want to match any word containing at least one of the strings above.
+    NOTE: the latin feature can be in the middle of the word, it can be a suffix,
+    a prefix or a full word on its own.
+
+    E.g., latin_ish_words("This works well") is []
+    E.g., latin_ish_words("This functions as expected")
+    is ["functions", "expected"]
+
+    :param text: string that forms English text
+    :return: list of words present in the text that have any of the Latin
+    features listed above. Order of the words in the list should be the same as
+    how they appear in the text.
+    :rtype: list
+    """
+    raise NotImplementedError
+
+
